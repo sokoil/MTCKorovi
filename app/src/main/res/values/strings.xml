@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MTCKorovi</string>
+
+    <string name="str_breed">Порода:</string>
+    <string name="str_color">Цвет:</string>
+    <string name="str_birthday">ДР:</string>
+    <string name="str_mother">Мать:</string>
+    <string name="str_father">Отец:</string>
+    <string name="str_cow_number">Корова №</string>
+    <string name="str_cowdata_date">Дата: </string>
+    <string name="str_cowdata_type">Тип записи: </string>
+    <string name="str_cowdata_data">Значение: </string>
+
+    <string name="str_save">Сохранить </string>
+    <string name="str_cowdata">Данные </string>
+
+    <string name="str_cowdata_add">Добавить</string>
+    <string name="str_cowdata_chart">График</string>
+</resources>

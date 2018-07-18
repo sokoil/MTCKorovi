@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="cowDataViewModel"
+            type="ru.weblokos.mtckorovi.ViewModel.CowDataViewModel"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_above="@id/btns"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:padding="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/radioOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@{cowDataViewModel.cowData.type == 1 ? true : false}"
+                        android:onClick="@{(view) -> cowDataViewModel.setCommuteType(1)}"
+                        android:text="Вес, кг"/>
+                    <RadioButton
+                        android:id="@+id/radioTwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@{cowDataViewModel.cowData.type == 2 ? true : false}"
+                        android:onClick="@{(view) -> cowDataViewModel.setCommuteType(2)}"
+                        android:text="Надой, л"/>
+                    <RadioButton
+                        android:id="@+id/radioThree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@{cowDataViewModel.cowData.type == 3 ? true : false}"
+                        android:onClick="@{(view) -> cowDataViewModel.setCommuteType(3)}"
+                        android:text="Жир. молока, %"/>
+                </RadioGroup>
+                <TextView
+                    android:layout_marginTop="30dp"
+                    android:layout_below="@id/radioGroup"
+                    android:id="@+id/labelDate"
+                    android:text="@string/str_cowdata_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/date"
+                    android:text="@{cowDataViewModel.cowData.dateString}"
+                    app:onClick="@{cowDataViewModel.changeDate}"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/labelDate"
+                    android:layout_alignParentEnd="true"/>
+                <TextView
+                    android:layout_marginTop="30dp"
+                    android:layout_below="@id/labelDate"
+                    android:id="@+id/labelData"
+                    android:text="@string/str_cowdata_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:inputType="numberDecimal"
+                    android:id="@+id/data"
+                    android:text="@{cowDataViewModel.cowData.dataValueString}"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/labelData"
+                    android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btns"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/save"
+                android:text="@string/str_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:onClick="@{cowDataViewModel.saveCowData}"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

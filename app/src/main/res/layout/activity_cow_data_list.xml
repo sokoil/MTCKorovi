@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="isLoading"
+            type="boolean" />
+        <variable
+            name="cowDataListViewModel"
+            type="ru.weblokos.mtckorovi.ViewModel.CowDataListViewModel"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_above="@id/lay_buttons"
+            android:id="@+id/cow_data_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:visibleGone="@{!isLoading}"/>
+
+        <LinearLayout
+            android:id="@+id/lay_buttons"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/add"
+                android:text="@string/str_cowdata_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:onClick="@{cowDataListViewModel.addData}"/>
+            <Button
+                android:id="@+id/chart"
+                android:text="@string/str_cowdata_chart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:onClick="@{cowDataListViewModel.showChart}"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

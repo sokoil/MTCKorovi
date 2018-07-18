@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="cowInfoViewModel"
+            type="ru.weblokos.mtckorovi.ViewModel.CowInfoViewModel"/>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_above="@id/btns"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <RelativeLayout
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp">
+                        <ImageView
+                            android:src="@drawable/icon_cow"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:textStyle="bold"
+                                android:id="@+id/number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{cowInfoViewModel.cow.stringNumber}"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <RelativeLayout
+                android:padding="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/labelBreed"
+                    android:text="@string/str_breed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Spinner
+                    android:entries="@{cowInfoViewModel.breeds}"
+                    android:gravity="right"
+                    android:id="@+id/breed"
+                    android:spinnerMode="dropdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/labelBreed"
+                    android:layout_alignParentEnd="true" />
+
+                <TextView
+                    android:layout_marginTop="30dp"
+                    android:layout_below="@id/labelBreed"
+                    android:id="@+id/labelColor"
+                    android:text="@string/str_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Spinner
+                    android:id="@+id/color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/labelColor"
+                    android:layout_alignParentEnd="true" />
+
+                <TextView
+                    android:layout_marginTop="30dp"
+                    android:layout_below="@id/labelColor"
+                    android:id="@+id/labelDate"
+                    android:text="@string/str_birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/birthday"
+                    android:text="@{cowInfoViewModel.cowBirthday}"
+                    app:onClick="@{cowInfoViewModel.changeDate}"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/labelDate"
+                    android:layout_alignParentEnd="true"/>
+                <!--<EditText
+                    android:id="@+id/birthday"
+                    android:minWidth="100dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/labelDate"
+                    android:layout_alignParentEnd="true"/>!-->
+
+                <TextView
+                    android:layout_marginTop="30dp"
+                    android:layout_below="@id/labelDate"
+                    android:id="@+id/labelMother"
+                    android:text="@string/str_mother"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Spinner
+                    android:spinnerMode="dropdown"
+                    android:id="@+id/mother"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/labelMother"
+                    android:layout_alignParentEnd="true" />
+
+                <TextView
+                    android:layout_marginTop="30dp"
+                    android:layout_below="@id/labelMother"
+                    android:id="@+id/labelFather"
+                    android:text="@string/str_father"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Spinner
+                    android:spinnerMode="dropdown"
+                    android:id="@+id/father"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/labelFather"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btns"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/save"
+                android:text="@string/str_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:onClick="@{cowInfoViewModel.saveCow}"/>
+            <Button
+                android:id="@+id/show_data"
+                android:text="@string/str_cowdata"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:onClick="@{cowInfoViewModel.showData}"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>
