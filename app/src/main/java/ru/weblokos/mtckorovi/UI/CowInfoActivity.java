@@ -1,12 +1,10 @@
 package ru.weblokos.mtckorovi.UI;
 
 import android.app.DatePickerDialog;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,7 +17,6 @@ import java.util.List;
 
 import ru.weblokos.mtckorovi.App;
 import ru.weblokos.mtckorovi.DB.Entity.BreedEntity;
-import ru.weblokos.mtckorovi.DB.Entity.ColorEntity;
 import ru.weblokos.mtckorovi.DB.Entity.CowEntity;
 import ru.weblokos.mtckorovi.DB.Entity.CowFilled;
 import ru.weblokos.mtckorovi.Model.Cow;
@@ -64,10 +61,10 @@ public class CowInfoActivity extends AppCompatActivity implements CowInfoCallbac
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(viewModel.cow.get() != null)
-                ((App) CowInfoActivity.this.getApplication()).getExecutors().diskIO().execute(() -> { // заполнение базы тестовыми данными
-                    int color = viewModel.getObservableColors().getValue().get(i).getId();
-                    viewModel.cow.get().getCow().setColor(color);
-                });
+                    ((App) CowInfoActivity.this.getApplication()).getExecutors().diskIO().execute(() -> {
+                        int color = viewModel.getObservableColors().getValue().get(i).getId();
+                        viewModel.cow.get().getCow().setColor(color);
+                    });
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -90,7 +87,7 @@ public class CowInfoActivity extends AppCompatActivity implements CowInfoCallbac
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(viewModel.cow.get() != null)
-                    ((App) CowInfoActivity.this.getApplication()).getExecutors().diskIO().execute(() -> { // заполнение базы тестовыми данными
+                    ((App) CowInfoActivity.this.getApplication()).getExecutors().diskIO().execute(() -> {
                         int father = i == 0 ? i : viewModel.getObservableAllCows().getValue().get(i-1).getId();
                         viewModel.cow.get().getCow().setFather(father);
                     });
@@ -116,14 +113,14 @@ public class CowInfoActivity extends AppCompatActivity implements CowInfoCallbac
 
             if(viewModel.cow.get().getMother() != 0) {
                 for (int i = 1; i < cows.size(); i++) {
-                    if (cows.get(i).getNumber() == viewModel.cow.get().getMother()) {
+                    if (cows.get(i).getId() == viewModel.cow.get().getMother()) {
                         binding.mother.setSelection(i);
                     }
                 }
             }
             if(viewModel.cow.get().getFather() != 0) {
                 for (int i = 1; i < cows.size(); i++) {
-                    if (cows.get(i).getNumber() == viewModel.cow.get().getFather()) {
+                    if (cows.get(i).getId() == viewModel.cow.get().getFather()) {
                         binding.father.setSelection(i);
                     }
                 }
@@ -132,48 +129,35 @@ public class CowInfoActivity extends AppCompatActivity implements CowInfoCallbac
     }
 
     private void subscribeUi(final CowInfoViewModel viewModel) {
-        viewModel.getObservableCow().observe(this, new Observer<CowFilled>() {
-            @Override
-            public void onChanged(@Nullable CowFilled mCow) {
-                viewModel.setCow(mCow);
-                if(viewModel.getObservableColors().getValue() != null && viewModel.getObservableCow().getValue() != null) {
-                    binding.color.setSelection(viewModel.getObservableCow().getValue().getColor() - 1);
-                }
-                updateParents();
-            }
-        });
-        viewModel.getObservableBreeds().observe(this, new Observer<List<BreedEntity>>() {
-            @Override
-            public void onChanged(@Nullable List<BreedEntity> breedEntities) {
-                if (breedEntities != null) {
-                    viewModel.breeds.clear();
-                    for(BreedEntity breed : breedEntities)
-                        viewModel.breeds.add(breed.getBreed());
-                } else {
-
-                }
-            }
-        });
-        viewModel.getObservableColors().observe(this, new Observer<List<ColorEntity>>() {
-            @Override
-            public void onChanged(@Nullable List<ColorEntity> colorEntities) {
-                if (colorEntities != null) {
-                    mColorAdapter.setColorList(colorEntities);
-                    mColorAdapter.notifyDataSetChanged();
-                    if(viewModel.getObservableCow().getValue() != null)
-                        binding.color.setSelection(viewModel.getObservableCow().getValue().getColor()-1);
-                } else {
-
-                }
-            }
-        });
-        viewModel.getObservableAllCows().observe(this, new Observer<List<CowFilled>>() {
-            @Override
-            public void onChanged(@Nullable List<CowFilled> cowFilleds) {
-                updateParents();
-
-            }
-        });
+        viewModel.getObservableCow().observe(this,
+                mCow -> {
+                    viewModel.setCow(mCow);
+                    if(viewModel.getObservableColors().getValue() != null && viewModel.getObservableCow().getValue() != null) {
+                        binding.color.setSelection(viewModel.getObservableCow().getValue().getColor() - 1);
+                    }
+                    updateParents();
+                });
+        viewModel.getObservableBreeds().observe(this,
+                breedEntities -> {
+                    if (breedEntities != null) {
+                        viewModel.breeds.clear();
+                        for(BreedEntity breed : breedEntities)
+                            viewModel.breeds.add(breed.getBreed());
+                    }
+                });
+        viewModel.getObservableColors().observe(this,
+                colorEntities -> {
+                    if (colorEntities != null) {
+                        mColorAdapter.setColorList(colorEntities);
+                        mColorAdapter.notifyDataSetChanged();
+                        if(viewModel.getObservableCow().getValue() != null)
+                            binding.color.setSelection(viewModel.getObservableCow().getValue().getColor()-1);
+                    }
+                });
+        viewModel.getObservableAllCows().observe(this,
+                cowFilleds -> {
+                    updateParents();
+                });
     }
 
     @Override

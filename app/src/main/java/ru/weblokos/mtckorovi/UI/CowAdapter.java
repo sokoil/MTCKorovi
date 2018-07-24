@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import java.util.List;
-import java.util.Objects;
 
 import ru.weblokos.mtckorovi.Model.Cow;
 import ru.weblokos.mtckorovi.R;

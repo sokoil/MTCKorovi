@@ -9,7 +9,6 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
-import ru.weblokos.mtckorovi.DB.Entity.BreedEntity;
 import ru.weblokos.mtckorovi.DB.Entity.CowEntity;
 import ru.weblokos.mtckorovi.DB.Entity.CowFilled;
 
@@ -26,24 +25,15 @@ public interface CowDao {
     @Query("SELECT * FROM cows")
     LiveData<List<CowEntity>> loadAllCows();
 
-    @Query("SELECT * FROM cows")
-    List<CowEntity> loadAllCowsSync();
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<CowEntity> cows);
-
-    @Query("select * from cows where number = :cow")
-    CowEntity loadCowSync(int cow);
-
-    @Query("select * from breeds where id = :breed")
-    BreedEntity loadBreedSync(int breed);
 
     @Query("select cows.*, color_value, breed_value from cows JOIN colors ON cows.color = colors.id JOIN breeds ON cows.breed = breeds.id")
     LiveData<List<CowFilled>> loadAllCowsWithProperties();
 
-    @Query("select cows.*, color_value, breed_value from cows JOIN colors ON cows.color = colors.id JOIN breeds ON cows.breed = breeds.id where not number = :cow")
+    @Query("select cows.*, color_value, breed_value from cows JOIN colors ON cows.color = colors.id JOIN breeds ON cows.breed = breeds.id where not cows.id = :cow")
     LiveData<List<CowFilled>> loadAllCowsWithPropertiesWithoutOne(int cow);
 
-    @Query("select cows.*, color_value, breed_value from cows JOIN colors ON cows.color = colors.id JOIN breeds ON cows.breed = breeds.id where number = :cow")
+    @Query("select cows.*, color_value, breed_value from cows JOIN colors ON cows.color = colors.id JOIN breeds ON cows.breed = breeds.id where cows.id = :cow")
     LiveData<CowFilled> loadCowWithProperties(int cow);
 }

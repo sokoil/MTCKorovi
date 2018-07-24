@@ -1,19 +1,12 @@
 package ru.weblokos.mtckorovi.DB.Entity;
 
-import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Date;
 
-import ru.weblokos.mtckorovi.App;
-import ru.weblokos.mtckorovi.Model.Color;
 import ru.weblokos.mtckorovi.Model.Cow;
-
-import static android.arch.persistence.room.ForeignKey.CASCADE;
-import static android.arch.persistence.room.ForeignKey.SET_DEFAULT;
 
 @Entity(tableName = "cows")
 public class CowEntity implements Cow { // Корова

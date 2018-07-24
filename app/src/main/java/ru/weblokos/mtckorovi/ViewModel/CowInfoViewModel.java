@@ -20,7 +20,6 @@ import ru.weblokos.mtckorovi.DB.Entity.BreedEntity;
 import ru.weblokos.mtckorovi.DB.Entity.ColorEntity;
 import ru.weblokos.mtckorovi.DB.Entity.CowFilled;
 import ru.weblokos.mtckorovi.DataRepository;
-import ru.weblokos.mtckorovi.UI.CowInfoActivity;
 import ru.weblokos.mtckorovi.UI.CowInfoCallback;
 
 public class CowInfoViewModel extends AndroidViewModel {

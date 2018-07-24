@@ -2,9 +2,7 @@ package ru.weblokos.mtckorovi;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
-import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ru.weblokos.mtckorovi.DB.DataBase;

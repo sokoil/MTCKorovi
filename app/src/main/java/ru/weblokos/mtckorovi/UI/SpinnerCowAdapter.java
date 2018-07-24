@@ -4,7 +4,6 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.ArrayAdapter;
 
 import java.util.List;
 
-import ru.weblokos.mtckorovi.Model.Color;
 import ru.weblokos.mtckorovi.Model.Cow;
 import ru.weblokos.mtckorovi.R;
 import ru.weblokos.mtckorovi.databinding.CowSpinnerItemBinding;

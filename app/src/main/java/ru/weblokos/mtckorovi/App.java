@@ -1,7 +1,6 @@
 package ru.weblokos.mtckorovi;
 
 import android.app.Application;
-import android.util.Log;
 
 import ru.weblokos.mtckorovi.DB.DataBase;
 

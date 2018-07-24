@@ -9,11 +9,7 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
-import ru.weblokos.mtckorovi.DB.Entity.BreedEntity;
 import ru.weblokos.mtckorovi.DB.Entity.CowDataEntity;
-import ru.weblokos.mtckorovi.DB.Entity.CowEntity;
-import ru.weblokos.mtckorovi.DB.Entity.CowFilled;
-import ru.weblokos.mtckorovi.Model.CowData;
 
 /**
  * Created by gravitas on 14.07.2018.

@@ -4,12 +4,9 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 
 import java.util.Date;
 
-import ru.weblokos.mtckorovi.BR;
 import ru.weblokos.mtckorovi.DB.Converter.DateConverter;
 import ru.weblokos.mtckorovi.Model.CowData;
 

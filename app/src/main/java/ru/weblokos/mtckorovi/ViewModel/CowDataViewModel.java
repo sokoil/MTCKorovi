@@ -1,36 +1,17 @@
 package ru.weblokos.mtckorovi.ViewModel;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
-import android.database.Observable;
 import android.databinding.BaseObservable;
 import android.databinding.BindingAdapter;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableField;
 import android.databinding.PropertyChangeRegistry;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
-import android.widget.RadioGroup;
 
 import java.util.Date;
-import java.util.List;
 
 import ru.weblokos.mtckorovi.App;
-import ru.weblokos.mtckorovi.BR;
-import ru.weblokos.mtckorovi.DB.Converter.DateConverter;
-import ru.weblokos.mtckorovi.DB.Entity.BreedEntity;
-import ru.weblokos.mtckorovi.DB.Entity.ColorEntity;
 import ru.weblokos.mtckorovi.DB.Entity.CowDataEntity;
-import ru.weblokos.mtckorovi.DB.Entity.CowFilled;
-import ru.weblokos.mtckorovi.DataRepository;
 import ru.weblokos.mtckorovi.UI.CowDataCallback;
-import ru.weblokos.mtckorovi.UI.CowInfoCallback;
 
 public class CowDataViewModel extends BaseObservable {
 

@@ -1,16 +1,11 @@
 package ru.weblokos.mtckorovi.UI;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import java.util.List;
-
-import ru.weblokos.mtckorovi.DB.Entity.CowDataEntity;
 import ru.weblokos.mtckorovi.R;
 import ru.weblokos.mtckorovi.ViewModel.CowDataListViewModel;
 import ru.weblokos.mtckorovi.databinding.ActivityCowDataListBinding;
@@ -44,18 +39,16 @@ public class CowDataListActivity extends AppCompatActivity implements CowDataLis
     }
 
     private void subscribeUi(final CowDataListViewModel viewModel) {
-        viewModel.getCowData().observe(this, new Observer<List<CowDataEntity>>() {
-            @Override
-            public void onChanged(@Nullable List<CowDataEntity> myCowData) {
-                if (myCowData != null) {
-                    binding.setIsLoading(false);
-                    mCowDataAdapter.setCowDataList(myCowData);
-                } else {
-                    binding.setIsLoading(true);
-                }
-                binding.executePendingBindings();
-            }
-        });
+        viewModel.getCowData().observe(this,
+                cowDataEntityList -> {
+                    if (cowDataEntityList != null) {
+                        binding.setIsLoading(false);
+                        mCowDataAdapter.setCowDataList(cowDataEntityList);
+                    } else {
+                        binding.setIsLoading(true);
+                    }
+                    binding.executePendingBindings();
+                });
     }
 
     @Override

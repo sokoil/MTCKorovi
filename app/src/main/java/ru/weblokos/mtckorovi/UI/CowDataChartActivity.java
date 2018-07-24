@@ -2,9 +2,7 @@ package ru.weblokos.mtckorovi.UI;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
-import android.arch.lifecycle.Observer;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.anychart.anychart.AnyChart;
@@ -51,13 +49,11 @@ public class CowDataChartActivity extends AppCompatActivity {
         mObservableCowData.setValue(null);
         LiveData<List<CowDataEntity>> datas = repository.loadCowData(getIntent().getExtras().getInt("cow"));
         mObservableCowData.addSource(datas, mObservableCowData::setValue);
-        mObservableCowData.observe(this, new Observer<List<CowDataEntity>>() {
-            @Override
-            public void onChanged(@Nullable List<CowDataEntity> cowDataEntityList) {
-                if(cowDataEntityList != null)
-                    setUpChart(cowDataEntityList);
-            }
-        });
+        mObservableCowData.observe(this,
+                cowDataEntityList -> {
+                    if(cowDataEntityList != null)
+                        setUpChart(cowDataEntityList);
+                });
     }
 
     private void setUpChart(List<CowDataEntity> cowDataEntityList) {
