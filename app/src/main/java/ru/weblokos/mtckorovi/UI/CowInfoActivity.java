@@ -105,26 +105,29 @@ public class CowInfoActivity extends AppCompatActivity implements CowInfoCallbac
             for(Cow cow : viewModel.getObservableAllCows().getValue())
                 cows.add(cow);
 
-            mMotherAdapter.setColorList(cows);
-            mMotherAdapter.notifyDataSetChanged();
+            binding.mother.post(new Runnable() {
+                @Override
+                public void run() {
+                    mMotherAdapter.setColorList(cows);
+                    mMotherAdapter.notifyDataSetChanged();
 
-            mFatherAdapter.setColorList(cows);
-            mFatherAdapter.notifyDataSetChanged();
+                    mFatherAdapter.setColorList(cows);
+                    mFatherAdapter.notifyDataSetChanged();
 
-            if(viewModel.cow.get().getMother() != 0) {
-                for (int i = 1; i < cows.size(); i++) {
-                    if (cows.get(i).getId() == viewModel.cow.get().getMother()) {
-                        binding.mother.setSelection(i);
+                    if(viewModel.cow.get().getMother() != 0 || viewModel.cow.get().getFather() != 0) {
+                        for (int i = 1; i < cows.size(); i++) {
+                            if (viewModel.cow.get().getMother() != 0 && cows.get(i).getId() == viewModel.cow.get().getMother()) {
+                                binding.mother.setSelection(i);
+                            }
+                            if (viewModel.cow.get().getFather() != 0 && cows.get(i).getId() == viewModel.cow.get().getFather()) {
+                                binding.father.setSelection(i);
+                            }
+                        }
                     }
                 }
-            }
-            if(viewModel.cow.get().getFather() != 0) {
-                for (int i = 1; i < cows.size(); i++) {
-                    if (cows.get(i).getId() == viewModel.cow.get().getFather()) {
-                        binding.father.setSelection(i);
-                    }
-                }
-            }
+            });
+
+
         }
     }
 

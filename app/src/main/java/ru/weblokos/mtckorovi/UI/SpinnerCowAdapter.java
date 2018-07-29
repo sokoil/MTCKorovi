@@ -26,11 +26,8 @@ public class SpinnerCowAdapter extends ArrayAdapter<Cow>
     }
 
     public void setColorList(final List<? extends Cow> cowList) {
-        if (mCowList == null) {
-            mCowList = cowList;
-        } else {
-            mCowList = cowList;
-        }
+        mCowList = cowList;
+        notifyDataSetChanged();
     }
 
     @Override
